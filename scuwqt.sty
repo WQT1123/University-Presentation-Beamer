@@ -1,0 +1,94 @@
+\ProvidesPackage{scuwqt}%定义该主题的名称
+%=========================================================
+%加载需要的包
+\RequirePackage{tikz,xeCJK,fontspec,multicol,graphics,xcolor}
+%=========================================================
+%定义基本的颜色
+\definecolor{Primary}{RGB}{120,0,30} % 主色
+\definecolor{Secondary}{RGB}{100,0,30} % 次色
+\setbeamercolor{title in head/foot}{fg=white, bg=Primary} % 设置标题部分的背景色
+\setbeamercolor{institute in head/foot}{fg=white, bg=Primary!80} % 设置机构部分的背景色
+\setbeamercolor{date in head/foot}{fg=white, bg=Primary!60} % 设置日期部分的背景色
+\setbeamercolor{structure}{fg=Primary}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{title}{fg=white, bg=Primary}
+\setbeamercolor{frametitle}{fg=white, bg=Secondary}
+\setbeamercolor{button}{bg=Primary,fg=white}
+\setbeamercolor{section in head/foot}{bg=Primary!80,fg=white}
+%=========================================================
+%设置目录自动加载
+\AtBeginSection[]{
+  \begin{frame}
+    \frametitle{contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%设置首页的基本格式
+\setbeamertemplate{title page}{
+    \vspace{3cm} % 调整这个值来控制标题位置
+    \begin{centering}
+        \begin{beamercolorbox}[sep=6pt,center]{title}
+            \usebeamerfont{title}\inserttitle\par%
+            \vspace{0.5cm}
+            \usebeamerfont{author}\insertauthor\par
+            \usebeamerfont{institute}\insertinstitute\par
+            \usebeamerfont{date}\insertdate\par
+        \end{beamercolorbox}
+    \end{centering}
+}
+%=========================================================
+%设置标题的格式
+\setbeamertemplate{frametitle}{
+  \nointerlineskip % 移除frametitle与上文之间的间距
+  \begin{beamercolorbox}[sep=0pt, leftskip=0pt, rightskip=0pt, wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par % 插入frametitle内容
+  \end{beamercolorbox}
+}
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fill[color=Primary!20] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \end{tikzpicture}
+}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+%设置脚注
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{institute in head/foot}
+    \usebeamerfont{institute in head/foot}\insertshortinstitute
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+%=========================================================
+
+
+\useoutertheme{miniframes} % 或其他
+\useinnertheme{circles} % 或其他
+\setlength{\parindent}{2em}
+\setbeamertemplate{background}{%
+\tikz[overlay,remember picture]{
+    \ifnum\thepage=1
+        \node[at=(current page.north),anchor=north,yshift=0.3cm] {
+            \includegraphics[width=\paperwidth,height=0.7\paperheight]{background.jpg}
+        };
+    \else
+        \node[at=(current page.south west), anchor=south west, xshift=0.1cm, yshift=0.3cm] {
+            \includegraphics[width=2cm]{logo.png}
+        };
+    \fi
+}
+
+    }%设置基本的背景
+
+\mode<all>
