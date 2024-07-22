@@ -1,0 +1,70 @@
+\documentclass[aspectratio=1610]{beamer}
+\usepackage{scuwqt}
+\setuniversity{SCU}
+%=========================================================
+\title{四川大学LaTeX模版}
+\author{Jack \ Ma}
+\vspace{12pt}
+\institute{四川大学 退学工程}
+\date{\today}
+\begin{document}
+%=========================================================
+\titlepages%切入首页
+\contentspage%切入目录页
+%=========================================================
+%正文开始！！！
+\section{Section1}
+\begin{frame}
+  \begin{minipage}[t][0.4\textheight][t]{\textwidth}
+      \begin{columns}[t]
+          % 左边区域
+          \begin{column}{0.3\textwidth}
+            \begin{figure}
+              \includegraphics[width=\textwidth]{girl.jpg}
+            \end{figure}
+              
+          \end{column}
+          % 右边区域
+          \begin{column}{0.7\textwidth}
+             \begin{itemize}
+              \item 教育经历：四川大学/退学工程
+              \item 修读课程：\begin{itemize}
+                              \item 材料力学、理论力学
+                            \end{itemize}
+              \item 英文水平:CET4、CET6           
+             \end{itemize}
+           
+          \end{column}
+      \end{columns}
+  \end{minipage}
+  \vspace{0.5cm}
+\begin{minipage}[t][0.5\textheight][t]{\textwidth}
+\skill{睡觉}{0,1}{任何时间任何地点，想睡就睡。}
+\skill{摸鱼}{0,1,2}{擅长摸鱼不被发现}
+\end{minipage}
+\end{frame}
+%===============================================
+\section{Section2}
+\subsection{Subsection1}
+\begin{frame}{title}
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+    
+
+  \end{column}
+  \begin{column}{0.5\textwidth}
+    
+    
+
+  \end{column}
+  
+\end{columns}
+\end{frame}
+\subsection{Subsection2}
+\begin{frame}
+  
+\end{frame}
+%===============================================
+\section{致谢}
+\thankyou
+\end{document}

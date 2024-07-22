@@ -1,0 +1,246 @@
+\ProvidesPackage{scuwqt}%定义该主题的名称
+%=========================================================
+%加载需要的包
+\RequirePackage{tikz,xeCJK,fontspec,multicol,graphics,xcolor,etoolbox,booktabs,array,colortbl,adjustbox,xcolor,graphicx,ifthen,fancyhdr}
+\useoutertheme{miniframes} % 或其他
+\useinnertheme{circles} % 或其他
+%=========================================================
+%定义所处院校
+\newcommand{\setuniversity}[1]{%
+    \def\university{#1}%
+    \ifthenelse{\equal{\university}{SCU}}{%
+        \def\bg{scubg.jpg}%
+        \def\contents{scucontents.jpg}%
+        \def\logo{logo.png}
+        \def\endpicture{scuthanks.jpg}
+    }{}%
+    \ifthenelse{\equal{\university}{HIT}}{%
+        \def\bg{hitbg.jpg}%
+        \def\contents{hitcontents.jpg}%
+        \def\logo{hitlogo.jpeg}
+        \def\endpicture{hitthanks.jpg}
+    }{}%
+    \ifthenelse{\equal{\university}{USTC}}{%
+        \def\bg{ustcbg.jpg}%
+        \def\contents{ustccontents.jpg}%
+        \def\logo{ustclogo.jpg}
+        \def\endpicture{ustcthanks.jpg}
+    }{}%
+    \universitysetup
+}
+\newcommand{\universitysetup}{
+    \ifthenelse{\equal{\university}{USTC}}{
+      \ustcsetup
+
+    }{
+    \ifthenelse{\equal{\university}{HIT}}{
+        \hitsetup
+    }{
+    \ifthenelse{\equal{\university}{SCU}}{
+        \scusetup
+    
+    }{
+        % 默认值
+        \def\universitycolor{black}
+        \def\universitylogo{default_logo.png}
+    }}}
+}
+%=========================================================
+%定义基本的颜色
+\newcommand{\scusetup}{
+\definecolor{Primary}{cmyk}{0.12,0.92,0.95,0.20} % 主色
+\setbeamercolor{title in head/foot}{fg=white, bg=Primary} % 设置标题部分的背景色
+\setbeamercolor{institute in head/foot}{fg=white, bg=Primary!70} % 设置机构部分的背景色
+\setbeamercolor{date in head/foot}{fg=white, bg=Primary!40} % 设置日期部分的背景色
+\setbeamercolor{structure}{fg=Primary}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{title}{fg=white, bg=Primary}
+\setbeamercolor{frametitle}{fg=white, bg=Primary}
+\setbeamercolor{button}{bg=Primary,fg=white}
+\setbeamercolor{section in head/foot}{bg=Primary,fg=white}
+}
+\newcommand{\hitsetup}{
+\definecolor{Primary}{cmyk}{1,0.45,0,0} % 主色
+\setbeamercolor{title in head/foot}{fg=white, bg=Primary} % 设置标题部分的背景色
+\setbeamercolor{institute in head/foot}{fg=white, bg=Primary!70} % 设置机构部分的背景色
+\setbeamercolor{date in head/foot}{fg=white, bg=Primary!40} % 设置日期部分的背景色
+\setbeamercolor{structure}{fg=Primary}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{title}{fg=white, bg=Primary}
+\setbeamercolor{frametitle}{fg=white, bg=Primary}
+\setbeamercolor{button}{bg=Primary,fg=white}
+\setbeamercolor{section in head/foot}{bg=Primary,fg=white}
+}
+\newcommand{\ustcsetup}{
+\definecolor{Primary}{cmyk}{0.7,0.5,0,0.6} % 主色
+\setbeamercolor{title in head/foot}{fg=white, bg=Primary} % 设置标题部分的背景色
+\setbeamercolor{institute in head/foot}{fg=white, bg=Primary!70} % 设置机构部分的背景色
+\setbeamercolor{date in head/foot}{fg=white, bg=Primary!40} % 设置日期部分的背景色
+\setbeamercolor{structure}{fg=Primary}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=red}
+\setbeamercolor{example text}{fg=blue}
+\setbeamercolor{title}{fg=white, bg=Primary}
+\setbeamercolor{frametitle}{fg=white, bg=Primary}
+\setbeamercolor{button}{bg=Primary,fg=white}
+\setbeamercolor{section in head/foot}{bg=Primary,fg=white}
+}
+%=========================================================
+%设置目录自动加载
+\AtBeginSection[]{
+  \begin{frame}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%设置首页的基本格式
+\setbeamertemplate{title page}{
+    \vspace{4cm} % 调整这个值来控制标题位置
+    \begin{centering}
+        \begin{beamercolorbox}[sep=6pt,center]{title}
+            \usebeamerfont{title}\inserttitle\par%
+            \vspace{0.2cm}
+            \usebeamerfont{author}\insertauthor\par
+            \vspace{0.2cm}
+            \usebeamerfont{institute}\insertinstitute\par
+            \vspace{0.1cm}
+            \usebeamerfont{date}\insertdate\par
+        \end{beamercolorbox}
+    \end{centering}
+}
+%=========================================================
+%设置标题的格式
+\setbeamertemplate{frametitle}{
+  \nointerlineskip % 移除frametitle与上文之间的间距
+  \begin{beamercolorbox}[sep=0pt, leftskip=0pt, rightskip=0pt, wd=\paperwidth]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par % 插入frametitle内容
+  \end{beamercolorbox}
+}
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fill[color=Primary!20] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \end{tikzpicture}
+}
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+% 设置脚注
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=3.25ex,dp=1ex,center]{title in head/foot}
+    \scriptsize % 调整字体大小，替换为 \Large 或 \LARGE 等以获得更大或更小的字体
+    \usebeamerfont{title in head/foot}\insertshorttitle
+    \hspace*{2ex}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.34\paperwidth,ht=3.25ex,dp=1ex,center]{institute in head/foot}
+    \scriptsize
+    \usebeamerfont{institute in head/foot}\insertshortinstitute
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.33\paperwidth,ht=3.25ex,dp=1ex,center]{date in head/foot}
+    \includegraphics[height=3.25ex]{\logo} % 替换为你的图片路径和文件名
+    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+%=========================================================
+\setbeamertemplate{background}{%
+\tikz[overlay,remember picture]{
+    \ifnum\thepage=1
+        \node[at=(current page.north),anchor=north,yshift=0.3cm] {
+            \includegraphics[width=\paperwidth,height=0.7\paperheight]{\bg}
+        };
+    % \else
+    %     \node[at=(current page.south west), anchor=south west, xshift=0.1cm, yshift=0.3cm] {
+    %         \includegraphics[width=2cm]{logo.png}
+    %     };
+    \fi
+}
+
+    }%设置基本的背景
+    \definecolor{subtitle}{HTML}{606060} % 
+    \setlength\parindent{2em}
+    \renewcommand{\arraystretch}{1.5}
+    %%%%%%%%%%%%%%% Draw Skill Bars %%%%%%%%%%%%%%% 
+    \newcommand{\drawskillbars}[1]{
+        \begin{tikzpicture}
+            % Draw 5 gray bars
+            \foreach \i in {0, 1, 2, 3}{
+                \fill[lightgray] (\i * 0.7 + 0.2 *\i,0) rectangle (0.7 + \i * 0.7 + \i * 0.2,0.1);
+            }
+            
+            % Draw number of black bars depending on the skill level
+            \foreach \i in {#1}{
+                \fill[blue!40] (\i * 0.7 + 0.2 *\i,0) rectangle (0.7 + \i * 0.7 + \i * 0.2,0.1);
+                %\fill[title] (\i * 0.7 + 0.2 *\i,0) rectangle (0.7 + \i * 0.7 + \i * 0.2,0.1);
+            }
+        \end{tikzpicture} \par
+    }
+    %%%%%%%%%%%%%%% Skills %%%%%%%%%%%%%%%
+    \newcommand{\skill}[3]{
+        % Name of the skill
+        \large
+        \noindent \hangafter=0
+        \adjustbox{valign=t}{\begin{minipage}{0.72\textwidth}
+            \large \noindent \hangafter=0
+            % Name of the skill
+            \textmd{#1} 
+            \normalsize \par 
+            \vspace{1em}
+             % Description
+            \noindent \small \color{subtitle} \parbox{1\linewidth}{\textsl{#3}} \par
+            \normalsize \par
+            \end{minipage}}
+        \adjustbox{valign=t}{\begin{minipage}{0.2\textwidth}
+            % Skill bars
+            \large \hangafter=0
+            %\noindent 
+            \drawskillbars{#2}
+            \end{minipage}}
+        \normalsize \par 
+        % Skill bars
+        %%\drawskillbars{#2}
+        %%\vspace{0.5em}
+        
+        \vspace{1.0em}
+        \normalsize \color{black} \par
+    }
+%=========================================================
+
+\newcommand{\thankyou}{
+  {\usebackgroundtemplate{
+  \tikz\node[at=(current page.west),xshift=-1cm, yshift=-3cm]  {\includegraphics[width=\paperwidth,height=0.8\paperheight]{\endpicture}};
+}
+  \begin{frame}
+    \vspace{7cm}
+    \begin{minipage}[t][0.2\textheight][t]{\textwidth}
+       \centering
+       \huge{欢迎指正}
+       
+    \end{minipage}
+    \vspace{1cm}
+  \end{frame}
+}}
+
+\newcommand{\titlepages}{
+  \begin{frame}
+    \titlepage
+  \end{frame}
+}
+
+\newcommand{\contentspage}{
+  {\usebackgroundtemplate{
+  \tikz\node[at=(current page.west),xshift=-1cm, yshift=-3cm]  {\includegraphics[width=0.55\paperwidth,height=\paperheight]{\contents}};
+}
+\begin{frame}
+  \hfill % 使用 \hfill 来推动内容到右侧
+  \begin{minipage}[t]{.35\textwidth} % 创建一个宽度为文本宽度一半的 minipage，你可以根据需要调整这个宽度
+    \tableofcontents % 将目录放在这个 minipage 中
+  \end{minipage}
+\end{frame}}
+}
+\mode<all>
